@@ -5,6 +5,9 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -23,12 +26,18 @@ public class MainActivity extends AppCompatActivity {
     //Explicit
     //Step 1.
     private MyManage objMyManage;
-
+    private EditText userEditText, passwordEditText;
+    private String userString, passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //BindWidget
+        userEditText = (EditText) findViewById(R.id.txtUser);
+        passwordEditText = (EditText) findViewById(R.id.txtPassword);
+
 
         //Step 2.
         //Request database
@@ -46,6 +55,22 @@ public class MainActivity extends AppCompatActivity {
 
     } //Main Method
 
+    public void clickLogin(View view) {
+
+        //Check space
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+        if (userString.equals("")  || passwordString.equals("")) {
+            //Have space
+            Toast.makeText(MainActivity.this,"Please enter Username and Password",Toast.LENGTH_SHORT).show();
+        } else {
+            //No space
+        } // if
+
+    } // Login
+
+
     private void synJSONtoSQLite() {
 
         //Change policy
@@ -57,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         int intTable = 1;
         String tag = "Restaurant";
 
-        
+
         //การ Syn มีขึ้นตอน 3 Step
         while (intTable <= 2) {
 

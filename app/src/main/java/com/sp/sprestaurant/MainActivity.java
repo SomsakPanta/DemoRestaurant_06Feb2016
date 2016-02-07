@@ -66,9 +66,33 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,"Please enter Username and Password",Toast.LENGTH_SHORT).show();
         } else {
             //No space
+
+            checkAuthen();
         } // if
 
     } // Login
+
+    private void checkAuthen() {
+
+        try {
+            String[] resultStrings = objMyManage.serchUser(userString);
+
+            if (passwordString.equals(resultStrings[2])) {
+                //Intent to service
+
+            } else {
+                Toast.makeText(MainActivity.this,
+                        "Wrong Password",
+                        Toast.LENGTH_SHORT).show();
+            } //If
+
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, "User : " + userString + " not found in database",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
+    } //checkAuthen
 
 
     private void synJSONtoSQLite() {

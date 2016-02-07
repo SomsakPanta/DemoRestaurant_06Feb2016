@@ -1,5 +1,6 @@
 package com.sp.sprestaurant;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -79,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (passwordString.equals(resultStrings[2])) {
                 //Intent to service
+                Intent objIntent = new Intent(MainActivity.this,ServiceActivity.class);
+                objIntent.putExtra("Name", resultStrings[3]);
+                startActivity(objIntent);
+                finish();
 
             } else {
                 Toast.makeText(MainActivity.this,
